@@ -123,6 +123,7 @@ from a few dozen full resolution polygons. Also fixed an old mistake
 in Baffin Island in all but the crude resolution; this also converted
 two mislabeled "lakes" into islands in the full and high resolution data.
 
+
 Version 2.2.2 January 2013: We have removed Sandy Island, Coral Sea
 (non feature), shifted Society Island polygons ~1 arc minute to the west,
 and replaced Mehetia Island with better data.  Furthermore, 50 islands
@@ -130,7 +131,7 @@ that were imprecise duplicates of more accurate WVS features were removed.
 Apart from the Agalega islands, these duplicates were mostly found in
 the Red Sea, the Persian Gulf, and in the Cook-Austral region.  GSHHG is
 now released under the lesser GNU License, v3 or any earlier version.
---------------------------------------------------------------------
+
 Version 2.2.1 July 2012: We have renamed the product GSHHG since it
 contains more than just shorelines (we distribute political boundaries
 and rivers as well).  The GSHHG building and distribution is now
@@ -142,7 +143,7 @@ There are no significant changes to the actual data features, other
 than a glitch in SA-NT border in Australia and removal of 7 zero-length
 border segments.  Following the rebranding to GSHHG the names of the
 distribution files have changed as well.
---------------------------------------------------------------------
+
 Version 2.2.0 July 2011: The area of small (< 0.1 km^2) polygons
 got truncated to 0.  This would cause gshhs to consider them
 as lines (borders or rivers) instead of polygons.  Furthermore,
@@ -157,17 +158,17 @@ details.  Finally, the binary gshhs files now store Antarctica in
 Also, the WDBII shapefiles  only had the first 3 levels of rivers;
 version 2.2.0 has all 11.  Finally, to be able to detect the river-lake
 features in the WDBII binary files we set the river flag to 1 if a closed feature.
---------------------------------------------------------------------
+
 Version 2.1.1 March 2011: Relatively minor fixes to low-resolution
 polygons, including editing errors introduced in v 2.1, removing
 a few spikes from 4-5 polygons, and fixing Germany-Poland border
 near the Baltic Sea.
---------------------------------------------------------------------
+
 Version 2.1 July 2010: Fixes lack of river-lake flag in the binary
 and shapefile release.  Shapefile polygons of level = 2 and with a
 negative area are river-lakes.  Also include WDBII border and river
 data as shapefiles.
---------------------------------------------------------------------
+
 version 2.0 July 15, 2009: Differs from the previous version 1.x in
 the following ways.
 
