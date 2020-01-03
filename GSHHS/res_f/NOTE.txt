@@ -1,0 +1,11 @@
+On Jan 2, 2020 I split the largets file GSHHS_f_Level_1.txt into two files:
+
+GSHHS_f_Level_1a.txt
+GSHHS_f_Level_1b.txt
+
+of approximately equal length (not size) so that the repo would fit in GitHub.
+Developers needing to run the gshhg tools will need to stitch these back together
+or modify the software to do so in the code.
+
+Paul Wessel
+

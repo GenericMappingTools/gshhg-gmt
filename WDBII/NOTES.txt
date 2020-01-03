@@ -1,0 +1,14 @@
+July 7, 2011: Remember that Level_05 is just a legacy file.  We used
+	it to extract the closed river-lake polygons in 2009 but it
+	also has some odd features that don't fit.  Our tools explicitly
+	skips level 5 when producing binary files for GSHHS and GMT.
+	All river-lakes are in their own level 00 file.  Thus, there
+	is no point editing the Level_05 file.
+
+Oct 29, 2014: Removed the Saudi-Kuwait neutral zone.
+
+Apr 9, 2015: Added the Sudan-South Sudan border
+
+Feb 22, 2016: Fixed non-closure of the Slovenia, Croatia and Hungary border.
+
+Apr 25, 2017: Added Kosovo border with Serbia

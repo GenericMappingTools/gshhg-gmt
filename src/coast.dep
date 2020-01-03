@@ -1,0 +1,269 @@
+#-------------------------------------------------------------------------------
+#	Data dependencies
+#-------------------------------------------------------------------------------
+
+F	=	../GSHHS/res_f
+H	=	../GSHHS/res_h
+I	=	../GSHHS/res_i
+L	=	../GSHHS/res_l
+C	=	../GSHHS/res_c
+B	=	../WDBII/borders
+R	=	../WDBII/rivers
+
+RES_F	=	$(F)/GSHHS_f_Eurasia.txt $(F)/GSHHS_f_Africa.txt $(F)/GSHHS_f_NAmerica.txt $(F)/GSHHS_f_SAmerica.txt $(F)/GSHHS_f_Antarctica.txt $(F)/GSHHS_f_Australia.txt \
+		$(F)/GSHHS_f_Level_1.txt $(F)/GSHHS_f_Level_2.txt $(F)/GSHHS_f_Level_3.txt $(F)/GSHHS_f_Level_4.txt
+RES_H	=	$(H)/GSHHS_h_Eurasia.txt $(H)/GSHHS_h_Africa.txt $(H)/GSHHS_h_NAmerica.txt $(H)/GSHHS_h_SAmerica.txt $(H)/GSHHS_h_Antarctica.txt $(H)/GSHHS_h_Australia.txt \
+		$(H)/GSHHS_h_Level_1.txt $(H)/GSHHS_h_Level_2.txt $(H)/GSHHS_h_Level_3.txt $(H)/GSHHS_h_Level_4.txt
+RES_I	=	$(I)/GSHHS_i_Eurasia.txt $(I)/GSHHS_i_Africa.txt $(I)/GSHHS_i_NAmerica.txt $(I)/GSHHS_i_SAmerica.txt $(I)/GSHHS_i_Antarctica.txt $(I)/GSHHS_i_Australia.txt \
+		$(I)/GSHHS_i_Level_1.txt $(I)/GSHHS_i_Level_2.txt $(I)/GSHHS_i_Level_3.txt $(I)/GSHHS_i_Level_4.txt
+RES_L	=	$(L)/GSHHS_l_Eurasia.txt $(L)/GSHHS_l_Africa.txt $(L)/GSHHS_l_NAmerica.txt $(L)/GSHHS_l_SAmerica.txt $(L)/GSHHS_l_Antarctica.txt $(L)/GSHHS_l_Australia.txt \
+		$(L)/GSHHS_l_Level_1.txt $(L)/GSHHS_l_Level_2.txt $(L)/GSHHS_l_Level_3.txt $(L)/GSHHS_l_Level_4.txt
+RES_C	=	$(C)/GSHHS_c_Eurasia.txt $(C)/GSHHS_c_Africa.txt $(C)/GSHHS_c_NAmerica.txt $(C)/GSHHS_c_SAmerica.txt $(C)/GSHHS_c_Antarctica.txt $(C)/GSHHS_c_Australia.txt \
+		$(C)/GSHHS_c_Level_1.txt $(C)/GSHHS_c_Level_2.txt $(C)/GSHHS_c_Level_3.txt $(C)/GSHHS_c_Level_4.txt
+BORD	=	$(B)/WDBII_Borders_Level_01.txt	$(B)/WDBII_Borders_Level_02.txt $(B)/WDBII_Borders_Level_03.txt
+RIV	=	$(R)/WDBII_Rivers_Level_01.txt $(R)/WDBII_Rivers_Level_02.txt $(R)/WDBII_Rivers_Level_03.txt \
+		$(R)/WDBII_Rivers_Level_04.txt $(R)/WDBII_Rivers_Level_00.txt $(R)/WDBII_Rivers_Level_06.txt \
+		$(R)/WDBII_Rivers_Level_07.txt $(R)/WDBII_Rivers_Level_08.txt $(R)/WDBII_Rivers_Level_10.txt \
+		$(R)/WDBII_Rivers_Level_11.txt $(R)/WDBII_Rivers_Level_13.txt
+
+$(F)/GSHHS_f_polygons.b:	$(RES_F)
+				$(bindir)/ascii_to_binary C f -V
+
+$(H)/GSHHS_h_polygons.b:	$(RES_H)
+				$(bindir)/ascii_to_binary C h -V
+
+$(I)/GSHHS_i_polygons.b:	$(RES_I)
+				$(bindir)/ascii_to_binary C i -V
+
+$(L)/GSHHS_l_polygons.b:	$(RES_L)
+				$(bindir)/ascii_to_binary C l -V
+
+$(C)/GSHHS_c_polygons.b:	$(RES_C)
+				$(bindir)/ascii_to_binary C c -V
+
+$(B)/WDBII_Borders_segments.b:	$(BORD)
+				$(bindir)/ascii_to_binary B -V
+
+$(R)/WDBII_Rivers_segments.b:	$(RIV)
+				$(bindir)/ascii_to_binary R -V
+
+# Dependencies of data on CVS-produced originals
+
+update: 	res_f/GSHHS_f_polygons.b res_h/GSHHS_h_polygons.b res_i/GSHHS_i_polygons.b \
+		res_l/GSHHS_l_polygons.b res_c/GSHHS_c_polygons.b wdb/wdb_f_borders.b wdb/wdb_f_rivers.b
+
+# All files used in coast/res_? are copies of the latest in the .. directories
+
+res_f/GSHHS_f_polygons.b: ../GSHHS/res_f/GSHHS_f_polygons.b res_f
+		(cd res_f; ln -sf ../../GSHHS/res_f/GSHHS_f_polygons.b GSHHS_f_polygons.b)
+
+res_h/GSHHS_h_polygons.b: ../GSHHS/res_h/GSHHS_h_polygons.b res_h
+		(cd res_h; ln -sf ../../GSHHS/res_h/GSHHS_h_polygons.b GSHHS_h_polygons.b)
+
+res_i/GSHHS_i_polygons.b: ../GSHHS/res_i/GSHHS_i_polygons.b res_i
+		(cd res_i; ln -sf ../../GSHHS/res_i/GSHHS_i_polygons.b GSHHS_i_polygons.b)
+
+res_l/GSHHS_l_polygons.b: ../GSHHS/res_l/GSHHS_l_polygons.b res_l
+		(cd res_l; ln -sf ../../GSHHS/res_l/GSHHS_l_polygons.b GSHHS_l_polygons.b)
+
+res_c/GSHHS_c_polygons.b: ../GSHHS/res_c/GSHHS_c_polygons.b res_c
+		(cd res_c; ln -sf ../../GSHHS/res_c/GSHHS_c_polygons.b GSHHS_c_polygons.b)
+
+wdb/wdb_f_borders.b:	../WDBII/borders/WDBII_Borders_segments.b wdb
+		(cd wdb; ln -sf ../../WDBII/borders/WDBII_Borders_segments.b wdb_f_borders.b)
+
+wdb/wdb_f_rivers.b:	../WDBII/rivers/WDBII_Rivers_segments.b wdb
+		(cd wdb; ln -sf ../../WDBII/rivers/WDBII_Rivers_segments.b wdb_f_rivers.b)
+
+wdbfiles:	wdb/wdb_f_borders.b wdb/wdb_h_borders.b wdb/wdb_i_borders.b wdb/wdb_l_borders.b wdb/wdb_c_borders.b \
+		wdb/wdb_f_rivers.b wdb/wdb_h_rivers.b wdb/wdb_i_rivers.b wdb/wdb_l_rivers.b wdb/wdb_c_rivers.b
+res_f:
+	mkdir -p res_f
+
+res_h:
+	mkdir -p res_h
+	
+res_i:
+	mkdir -p res_i
+
+res_l:
+	mkdir -p res_l
+
+res_c:
+	mkdir -p res_c
+
+wdb:
+	mkdir -p wdb
+#-------------------------------------------------------------------------------
+# full Dependencies:
+#-------------------------------------------------------------------------------
+full:				res_f/binned_GSHHS_f.nc res_f/binned_border_f.nc res_f/binned_river_f.nc
+info_f:				res_f/GSHHS_f_info.lis
+
+res_f/binned_GSHHS_f.nc: 	res_f/binned_GSHHS_f.pt
+				$(bindir)/shoremaker res_f/binned_GSHHS_f
+					
+res_f/binned_GSHHS_f.pt:	res_f/GSHHS_f_nodes.nc
+				$(bindir)/polygon_to_bins res_f/GSHHS_f_polygons.b $(BIN_f) res_f/GSHHS_f_nodes.nc res_f/GSHHS_f_ndid.b res_f/binned_GSHHS_f
+
+res_f/GSHHS_f_nodes.nc: 	res_f/GSHHS_f_polygons.b
+				$(bindir)/polygon_setnodes res_f/GSHHS_f_polygons.b $(BIN_f) res_f/GSHHS_f_nodes.nc res_f/GSHHS_f_ndid.b
+
+res_f/GSHHS_f_info.lis: 	res_f/GSHHS_f_polygons.b
+				$(bindir)/polygon_final_info res_f/GSHHS_f_polygons.b > res_f/GSHHS_f_info.lis
+
+res_f/binned_border_f.nc:	res_f/binned_border_f.pt
+				$(bindir)/linemaker res_f/binned_border_f
+
+res_f/binned_border_f.pt:	wdb/wdb_f_borders.b
+				$(bindir)/lines_to_bins wdb/wdb_f_borders.b $(BIN_f) res_f/binned_border_f
+
+res_f/binned_river_f.nc:	res_f/binned_river_f.pt
+				$(bindir)/linemaker res_f/binned_river_f
+
+res_f/binned_river_f.pt:	wdb/wdb_f_rivers.b
+				$(bindir)/lines_to_bins wdb/wdb_f_rivers.b $(BIN_f) res_f/binned_river_f
+#-------------------------------------------------------------------------------
+# high Dependencies:
+#-------------------------------------------------------------------------------
+high:				res_h/binned_GSHHS_h.nc res_h/binned_border_h.nc res_h/binned_river_h.nc
+info_h:				res_h/GSHHS_h_info.lis
+
+res_h/binned_GSHHS_h.nc: 	res_h/binned_GSHHS_h.pt
+				$(bindir)/shoremaker res_h/binned_GSHHS_h
+					
+res_h/binned_GSHHS_h.pt:	res_h/GSHHS_h_nodes.nc
+				$(bindir)/polygon_to_bins res_h/GSHHS_h_polygons.b $(BIN_h) res_h/GSHHS_h_nodes.nc res_h/GSHHS_h_ndid.b res_h/binned_GSHHS_h
+
+res_h/GSHHS_h_nodes.nc: 	res_h/GSHHS_h_polygons.b
+				$(bindir)/polygon_setnodes res_h/GSHHS_h_polygons.b $(BIN_h) res_h/GSHHS_h_nodes.nc res_h/GSHHS_h_ndid.b
+
+res_h/GSHHS_h_info.lis: 	res_h/GSHHS_h_polygons.b
+				$(bindir)/polygon_final_info res_h/GSHHS_h_polygons.b > res_h/GSHHS_h_info.lis
+
+res_h/binned_border_h.nc:	res_h/binned_border_h.pt
+				$(bindir)/linemaker res_h/binned_border_h
+
+res_h/binned_border_h.pt:	wdb/wdb_h_borders.b
+				$(bindir)/lines_to_bins wdb/wdb_h_borders.b $(BIN_h) res_h/binned_border_h
+
+wdb/wdb_h_borders.b:		wdb/wdb_f_borders.b
+				$(bindir)/line_shrink wdb/wdb_f_borders.b $(DP_h) wdb/wdb_h_borders.b
+
+wdb/wdb_h_rivers.b:		wdb/wdb_f_rivers.b
+				$(bindir)/line_shrink wdb/wdb_f_rivers.b $(DP_h) wdb/wdb_h_rivers.b
+
+res_h/binned_river_h.nc:	res_h/binned_river_h.pt
+				$(bindir)/linemaker res_h/binned_river_h
+
+res_h/binned_river_h.pt:	wdb/wdb_h_rivers.b
+				$(bindir)/lines_to_bins wdb/wdb_h_rivers.b $(BIN_h) res_h/binned_river_h
+#-------------------------------------------------------------------------------
+# int Dependencies:
+#-------------------------------------------------------------------------------
+int:				res_i/binned_GSHHS_i.nc res_i/binned_border_i.nc res_i/binned_river_i.nc
+info_i:				res_i/GSHHS_i_info.lis
+
+res_i/binned_GSHHS_i.nc: 	res_i/binned_GSHHS_i.pt
+				$(bindir)/shoremaker res_i/binned_GSHHS_i
+					
+res_i/binned_GSHHS_i.pt:	res_i/GSHHS_i_nodes.nc
+				$(bindir)/polygon_to_bins res_i/GSHHS_i_polygons.b $(BIN_i) res_i/GSHHS_i_nodes.nc res_i/GSHHS_i_ndid.b res_i/binned_GSHHS_i
+
+res_i/GSHHS_i_nodes.nc: 	res_i/GSHHS_i_polygons.b
+				$(bindir)/polygon_setnodes res_i/GSHHS_i_polygons.b $(BIN_i) res_i/GSHHS_i_nodes.nc res_i/GSHHS_i_ndid.b
+
+res_i/GSHHS_i_info.lis: 	res_i/GSHHS_i_polygons.b
+				$(bindir)/polygon_final_info res_i/GSHHS_i_polygons.b > res_i/GSHHS_i_info.lis
+
+res_i/binned_border_i.nc:	res_i/binned_border_i.pt
+				$(bindir)/linemaker res_i/binned_border_i
+
+res_i/binned_border_i.pt:	wdb/wdb_i_borders.b
+				$(bindir)/lines_to_bins wdb/wdb_i_borders.b $(BIN_i) res_i/binned_border_i
+
+wdb/wdb_i_borders.b:		wdb/wdb_f_borders.b
+				$(bindir)/line_shrink wdb/wdb_f_borders.b $(DP_i) wdb/wdb_i_borders.b
+
+wdb/wdb_i_rivers.b:		wdb/wdb_f_rivers.b
+				$(bindir)/line_shrink wdb/wdb_f_rivers.b $(DP_i) wdb/wdb_i_rivers.b
+
+res_i/binned_river_i.nc:	res_i/binned_river_i.pt
+				$(bindir)/linemaker res_i/binned_river_i
+
+res_i/binned_river_i.pt:	wdb/wdb_i_rivers.b
+				$(bindir)/lines_to_bins wdb/wdb_i_rivers.b $(BIN_i) res_i/binned_river_i
+#-------------------------------------------------------------------------------
+# low Dependencies:
+#-------------------------------------------------------------------------------
+low:				res_l/binned_GSHHS_l.nc res_l/binned_border_l.nc res_l/binned_river_l.nc
+info_l:				res_l/GSHHS_l_info.lis
+
+res_l/binned_GSHHS_l.nc: 	res_l/binned_GSHHS_l.pt
+				$(bindir)/shoremaker res_l/binned_GSHHS_l
+					
+res_l/binned_GSHHS_l.pt:	res_l/GSHHS_l_nodes.nc
+				$(bindir)/polygon_to_bins res_l/GSHHS_l_polygons.b $(BIN_l) res_l/GSHHS_l_nodes.nc res_l/GSHHS_l_ndid.b res_l/binned_GSHHS_l
+
+res_l/GSHHS_l_nodes.nc: 	res_l/GSHHS_l_polygons.b
+				$(bindir)/polygon_setnodes res_l/GSHHS_l_polygons.b $(BIN_l) res_l/GSHHS_l_nodes.nc res_l/GSHHS_l_ndid.b
+
+res_l/GSHHS_l_info.lis: 	res_l/GSHHS_l_polygons.b
+				$(bindir)/polygon_final_info res_l/GSHHS_l_polygons.b > res_l/GSHHS_l_info.lis
+
+res_l/binned_border_l.nc:	res_l/binned_border_l.pt
+				$(bindir)/linemaker res_l/binned_border_l
+
+res_l/binned_border_l.pt:	wdb/wdb_l_borders.b
+				$(bindir)/lines_to_bins wdb/wdb_l_borders.b $(BIN_l) res_l/binned_border_l
+
+wdb/wdb_l_borders.b:		wdb/wdb_f_borders.b
+				$(bindir)/line_shrink wdb/wdb_f_borders.b $(DP_l) wdb/wdb_l_borders.b
+
+wdb/wdb_l_rivers.b:		wdb/wdb_f_rivers.b
+				$(bindir)/line_shrink wdb/wdb_f_rivers.b $(DP_l) wdb/wdb_l_rivers.b
+
+res_l/binned_river_l.nc:	res_l/binned_river_l.pt
+				$(bindir)/linemaker res_l/binned_river_l
+
+res_l/binned_river_l.pt:	wdb/wdb_l_rivers.b
+				$(bindir)/lines_to_bins wdb/wdb_l_rivers.b $(BIN_l) res_l/binned_river_l
+#-------------------------------------------------------------------------------
+# crude Dependencies:
+#-------------------------------------------------------------------------------
+crude:				res_c/binned_GSHHS_c.nc res_c/binned_border_c.nc res_c/binned_river_c.nc
+info_c:				res_c/GSHHS_c_info.lis
+
+res_c/binned_GSHHS_c.nc: 	res_c/binned_GSHHS_c.pt
+				$(bindir)/shoremaker res_c/binned_GSHHS_c
+					
+res_c/binned_GSHHS_c.pt:	res_c/GSHHS_c_nodes.nc
+				$(bindir)/polygon_to_bins res_c/GSHHS_c_polygons.b $(BIN_c) res_c/GSHHS_c_nodes.nc res_c/GSHHS_c_ndid.b res_c/binned_GSHHS_c
+
+res_c/GSHHS_c_nodes.nc: 	res_c/GSHHS_c_polygons.b
+				$(bindir)/polygon_setnodes res_c/GSHHS_c_polygons.b $(BIN_c) res_c/GSHHS_c_nodes.nc res_c/GSHHS_c_ndid.b
+
+res_c/GSHHS_c_info.lis: 	res_c/GSHHS_c_polygons.b
+				$(bindir)/polygon_final_info res_c/GSHHS_c_polygons.b > res_c/GSHHS_c_info.lis
+
+res_c/binned_border_c.nc:	res_c/binned_border_c.pt
+				$(bindir)/linemaker res_c/binned_border_c
+
+res_c/binned_border_c.pt:	wdb/wdb_c_borders.b
+				$(bindir)/lines_to_bins wdb/wdb_c_borders.b $(BIN_c) res_c/binned_border_c
+
+wdb/wdb_c_borders.b:		wdb/wdb_f_borders.b
+				$(bindir)/line_shrink wdb/wdb_f_borders.b $(DP_c) wdb/wdb_c_borders.b
+
+wdb/wdb_c_rivers.b:		wdb/wdb_f_rivers.b
+				$(bindir)/line_shrink wdb/wdb_f_rivers.b $(DP_c) wdb/wdb_c_rivers.b
+
+res_c/binned_river_c.nc:	res_c/binned_river_c.pt
+				$(bindir)/linemaker res_c/binned_river_c
+
+res_c/binned_river_c.pt:	wdb/wdb_c_rivers.b
+				$(bindir)/lines_to_bins wdb/wdb_c_rivers.b $(BIN_c) res_c/binned_river_c
+#-------------------------------------------------------------------------------
+binary:				$(F)/GSHHS_f_polygons.b $(H)/GSHHS_h_polygons.b $(I)/GSHHS_i_polygons.b $(L)/GSHHS_l_polygons.b \
+ 				$(C)/GSHHS_c_polygons.b $(B)/WDBII_Borders_segments.b $(R)/WDBII_Rivers_segments.b
+

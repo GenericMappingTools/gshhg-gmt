@@ -1,0 +1,16 @@
+# INSTRUCTIONS.TXT 680 2017-06-15 03:15:37Z pwessel $
+
+It has been decided that 2.3.7 is the last 2.3.x series of the GSHHG files
+distributed as polygons (binary and shapefiles).  The reason is that it is
+just too much manual work to add new full-resolution polygons and derive
+lower-resolution versions that do not self-intersect or intersect other
+polygons.  We may still continue to update the full-resolution polygons
+and make new netcdf tiles for GMT but will no longer issue the bin and
+shp versions.
+
+Paul Wessel, June 2017
+
+If you are a guru and wish to make changes of some sort to the GSHHG polygons or WDBII lines,
+cd to src and read GSHHG_updating.html for further instructions.
+
+Paul Wessel, June 2013

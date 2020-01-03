@@ -1,0 +1,26 @@
+#
+# Configuration for GSHHG distribution
+#
+# These are the default settings.  You can override them by supplying your
+# own config.mk file which will take precedence.
+# This project still depends on GMT4.
+# Paul Wessel, June 15, 2017
+
+
+# Directory with GMT4 src code:
+GMTSRCDIR	= $(GMTHOME4)/src/
+# FTP repository for gmt
+GMT_FTPSITE	= ftp.soest.hawaii.edu:/export/ftp1/ftp/pub/gmt
+# FTP repository for gshhg
+GSHHG_FTPSITE	= ftp.soest.hawaii.edu:/export/ftp1/ftp/pub/gshhg
+# HTTP repository for gshhg
+GSHHG_WWWSITE	= imina.soest.hawaii.edu:/export/imina2/httpd/htdocs/pwessel/gshhg
+# HTTP repository for GMT 4 site
+GMT_WWWSITE	= gmtserver.soest.hawaii.edu:/opt/bitnami/rubystack-3.2.3-0/apps/files/files
+# GSHHS data version to be released next:
+GSHHG_NEW_VERSION = 2.3.7
+# GSHHS compatibility version (8 bit integer), increase only
+# when a new release breaks binary backwards compatibility:
+GSHHG_COMPATIBILITY_VERSION = 15
+# Point to GNU version of tar:
+GNUTAR		= $(shell which gnutar || which gtar || which tar)
