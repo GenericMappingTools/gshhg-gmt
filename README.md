@@ -7,21 +7,19 @@ Updates the Northern Mariana Islands with CUPS data from NOAA, adds
 two missing islands to northern Norway, and adds in the missing
 Kosovo-Serbia boundary.
 
-Earlier GSHHG Version-specific comments:
-====================================================================
+## Earlier GSHHG Version-specific comments:
+
 Version 2.3.6 August 19, 2016
 
 Fixed 11 crossings in Antarctica grounding line and one in the ice front.
 Added missing islands Georgetown and MacMahan, ME, and updated Jan Mayen, Norway
 [thanks to Norwegian Polar Institute]
 
-====================================================================
 Version 2.3.5 April 12, 2016
 
 Added missing boundary between Sudan and South Sudan.
 Fixed non-closure of the Slovenia, Croatia and Hungary borders.
 
-====================================================================
 Version 2.3.4 Jan 1, 2015
 
 Corrected formatting error in the binary versions of the borders
@@ -114,18 +112,16 @@ Wessel, P., and W. H. F. Smith (1996), A global, self-consistent, hierarchical,
 	high-resolution shoreline database, J. Geophys. Res., 101(B4), 8741–8743.
 
 Earlier GSHHG Version-specific comments:
-====================================================================
+
 Version 2.2.4 Nov 2013: We added three missing lakes (Mono, Trinity,
 and Isabella) in California, plus two islands in Lake Mono. Also found
 a bug in polygon_consistency that failed to find some spikes (~20-25
 polygons affected), as well as an incorrect lake in Antarctica.
---------------------------------------------------------------------
-====================================================================
+
 Version 2.2.3 July 2013: We eliminated ~120 spikes (< 2m thick excursions)
 from a few dozen full resolution polygons. Also fixed an old mistake
 in Baffin Island in all but the crude resolution; this also converted
 two mislabeled "lakes" into islands in the full and high resolution data.
---------------------------------------------------------------------
 
 Version 2.2.2 January 2013: We have removed Sandy Island, Coral Sea
 (non feature), shifted Society Island polygons ~1 arc minute to the west,
