@@ -1,15 +1,15 @@
 # GSHHG: Global Self-consistent Hierarchical High-resolution Geography
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/GenericMappingTools/gmt-gshhg)
-![GitHub](https://img.shields.io/github/license/GenericMappingTools/gmt-gshhg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/GenericMappingTools/gshhg-gmt)
+![GitHub](https://img.shields.io/github/license/GenericMappingTools/gshhg-gmt)
 
 This repository contains the data and scripts that maintain and build
 the gmt-dcw package used by GMT.
 
 ## Download
 
-You can download the latest gmt-gshhg package from
-[GitHub releases](https://github.com/GenericMappingTools/gmt-gshhg)
+You can download the latest gshhg-gmt package from
+[GitHub releases](https://github.com/GenericMappingTools/gshhg-gmt)
 or from the [GMT main site](https://www.generic-mapping-tools.org/download/).
 
 ## References
