@@ -1,2 +1,6 @@
 gmt.history
 gmt.conf
+bin/*
+GSHHS/res_f/GSHHS_f_Level_1.txt
+src/*.o
+src/*.a
