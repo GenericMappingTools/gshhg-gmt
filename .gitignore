@@ -2,5 +2,12 @@ gmt.history
 gmt.conf
 bin/*
 GSHHS/res_f/GSHHS_f_Level_1.txt
+GSHHS/res_?/GSHHS_?_polygons.b
+src/res_?/binned_*_?.*
+src/res_?/GSHHS_?_*.b
+src/res_?/GSHHS_?_*.nc
+src/wdb/wdb_?_*.b
+WDBII/rivers/WDBII_Rivers_segments.b
+WDBII/borders/WDBII_Borders_segments.b
 src/*.o
 src/*.a
