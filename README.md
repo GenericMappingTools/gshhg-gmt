@@ -1,13 +1,50 @@
-# Global Self-consistent Hierarchical High-resolution Geography (GSHHG)
+# GSHHG: Global Self-consistent Hierarchical High-resolution Geography
 
-         Version 2.3.7 June 15, 2017
-         Distributed under the Lesser GNU Public License
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/GenericMappingTools/gshhg-gmt)
+![GitHub](https://img.shields.io/github/license/GenericMappingTools/gshhg-gmt)
+
+This repository contains the data and scripts that maintain and build
+the gmt-dcw package used by GMT.
+
+## Download
+
+You can download the latest gshhg-gmt package from
+[GitHub releases](https://github.com/GenericMappingTools/gshhg-gmt)
+or from the [GMT main site](https://www.generic-mapping-tools.org/download/).
+
+## References
+
+- Bohlander, J. and T. Scambos. 2007. Antarctic coastlines and grounding line
+  derived from MODIS Mosaic of Antarctica (MOA), Boulder, Colorado USA:
+  National Snow and Ice Data Center.
+- Gorny, A. J. (1977), World Data Bank II General User GuideRep. PB 271869,
+  10pp, Central Intelligence Agency, Washington, DC.
+- Soluri, E. A., and V. A. Woodson (1990), World Vector Shoreline,
+  Int. Hydrograph. Rev., LXVII(1), 27–35.
+- Wessel, P., and W. H. F. Smith (1996), A global, self-consistent, hierarchical,
+  high-resolution shoreline database, J. Geophys. Res., 101(B4), 8741–8743.
+
+## Authors
+
+- Paul Wessel     Primary contact: pwessel@hawaii.edu
+- Walter H. F. Smith
+
+## Changelog
+
+The detailed changelog is available [here](ChangeLog).
+
+## License
+
+The project is distributed under the
+[GNU Lesser General Public License](http://www.gnu.org/licenses/lgpl-3.0.html).
+
+## Earlier GSHHG Version-specific comments:
+
+Version 2.3.7 June 15, 2017
 
 Updates the Northern Mariana Islands with CUPS data from NOAA, adds
 two missing islands to northern Norway, and adds in the missing
 Kosovo-Serbia boundary.
-
-## Earlier GSHHG Version-specific comments:
 
 Version 2.3.6 August 19, 2016
 
@@ -98,20 +135,6 @@ GSHHG is distributed in several representations:
 Many thanks to Tom Kratzke, Metron Inc., for patiently testing
 many draft versions of GSHHS and reporting inconsistencies such as
 erratic data points and crossings.
-
-References:
-
-Bohlander, J. and T. Scambos. 2007. Antarctic coastlines and grounding line
-	derived from MODIS Mosaic of Antarctica (MOA), Boulder, Colorado USA:
-	National Snow and Ice Data Center.
-Gorny, A. J. (1977), World Data Bank II General User GuideRep. PB 271869,
-	10pp, Central Intelligence Agency, Washington, DC.
-Soluri, E. A., and V. A. Woodson (1990), World Vector Shoreline,
-	Int. Hydrograph. Rev., LXVII(1), 27–35.
-Wessel, P., and W. H. F. Smith (1996), A global, self-consistent, hierarchical,
-	high-resolution shoreline database, J. Geophys. Res., 101(B4), 8741–8743.
-
-Earlier GSHHG Version-specific comments:
 
 Version 2.2.4 Nov 2013: We added three missing lakes (Mono, Trinity,
 and Isabella) in California, plus two islands in Lake Mono. Also found
@@ -207,6 +230,7 @@ political boundaries in the Persian Gulf that has been fixed.
 These changes required us to enhance the GSHHG C-structure used to
 read and write the data.  As of version 2.0 the header structure is
 
+```
 struct GSHHG {  /* Global Self-consistent Hierarchical High-resolution Shorelines */
         int id;         /* Unique polygon id number, starting at 0 */
         int n;          /* Number of points in this polygon */
@@ -224,13 +248,16 @@ struct GSHHG {  /* Global Self-consistent Hierarchical High-resolution Shoreline
         int container;  /* Id of container polygon that encloses this polygon (-1 if none) */
         int ancestor;   /* Id of ancestor polygon in the full resolution set that was the source of this polygon (-1 if none) */
 };
+```
 
 Following each header structure is n structures of coordinates:
 
+```
 struct GSHHG_POINT {	/* Each lon, lat pair is stored in micro-degrees in 4-byte signed integer format */
 	int32_t x;
 	int32_t y;
 };
+```
 
 Some useful information:
 
@@ -264,5 +291,3 @@ F) The netcdf-formatted coastlines distributed with GMT derives directly from GS
    the polygons have been broken into segments within tiles.  These files are not meant
    to be used by users other than via GMT tools (pscoast, grdlandmask, etc).
 
-Paul Wessel     Primary contact: pwessel@hawaii.edu
-Walter H. F. Smith
