@@ -86,7 +86,7 @@ int main (int argc, char **argv)
 #endif
 		cont_no = P[id1].h.continent;	/* Continent number 1-6 (0 if not a continent) */
 		
-		GMT_init_track (P[id1].lat, P[id1].h.n, &ylist1);
+		gmt_init_track (P[id1].lat, P[id1].h.n, &ylist1);
 			
 		for (id2 = MAX (N_CONTINENTS, id1 + 1); id2 < n_id; id2++) {	/* Dont start earlier than N_CONTINENTS since no point comparing continents */
 #ifdef TEST
@@ -125,9 +125,9 @@ int main (int argc, char **argv)
 			
 			if (verbose) fprintf (stderr, "polygon_xover: %6d vs %6d [T = %6d]\r", P[id1].h.id, P[id2].h.id, nx_tot);
 			
-			GMT_init_track (Y, P[id2].h.n, &ylist2);
+			gmt_init_track (Y, P[id2].h.n, &ylist2);
 
-			nx = GMT_crossover (P[id1].lon, P[id1].lat, NULL, ylist1, P[id1].h.n, X, Y, NULL, ylist2, P[id2].h.n, FALSE, TRUE, &XC);
+			nx = gmt_crossover (P[id1].lon, P[id1].lat, NULL, ylist1, P[id1].h.n, X, Y, NULL, ylist2, P[id2].h.n, FALSE, TRUE, &XC);
 			GMT_free ((void *)ylist2);
 			if (Pol_Is_Antarctica (cont_no)) {	/* Undo projection for crossover results */
 				for (i = 0; i < nx; i++) rtheta2xy (&XC.x[i], &XC.y[i]);

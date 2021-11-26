@@ -6,7 +6,7 @@
  * Version:	3.2	Writes netCDF 4 files
  */
 
-#include "gmt.h"
+#include "gmt_dev.h"
 #include "shore.h"
 
 int main (int argc, char **argv) {

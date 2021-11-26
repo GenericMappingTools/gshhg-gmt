@@ -3,7 +3,9 @@
  * Here are some things we use in dealing with the wvs data.
  */
 
-#include "gmt.h"
+#include "gmt_dev.h"
+#include "gmtcompat.h"
+
 #define _GMT_
 #define _WVS_H_
 

@@ -6,7 +6,7 @@
  *		3.2	use GMT 4
  */
 
-#include "gmt.h"
+#include "gmt_dev.h"
 #include "shore.h"
 
 struct GMT_BR s;

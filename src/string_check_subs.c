@@ -393,8 +393,8 @@ int new_stringcheck (struct LONGPAIR p[], int *n, double x[], double y[], int id
 		if (p[i].x == 360000000) p[i].x = 0;
 	}
 
-	GMT_init_track (y, *n, &ylist);
-	nx = GMT_crossover (x, y, NULL, ylist, *n, x, y, NULL, ylist, *n, TRUE, TRUE, &c);
+	gmt_init_track (y, *n, &ylist);
+	nx = gmt_crossover (x, y, NULL, ylist, *n, x, y, NULL, ylist, *n, TRUE, TRUE, &c);
 
 	if (nx == 1 && p[0].x == p[*n-1].x && p[0].x == lrint(c.x[0]) && p[0].y == p[*n-1].y && p[0].y == lrint(c.y[0]) ) {
 		/* This crossing was merely a closed polygon.  */
@@ -451,7 +451,7 @@ int new_stringcheck (struct LONGPAIR p[], int *n, double x[], double y[], int id
 		}
 		
 		if (verbose) fprintf (stderr, "\nstring_check_subs: Polygon %d had %d points removed...", id, cut);
-		nx = GMT_crossover (x, y, NULL, ylist, *n, x, y, NULL, ylist, *n, TRUE, TRUE, &c);
+		nx = gmt_crossover (x, y, NULL, ylist, *n, x, y, NULL, ylist, *n, TRUE, TRUE, &c);
 			
 		if (nx) {	/* Shit... */
 			if (verbose) fprintf (stderr, "FAILED\n");

@@ -52,8 +52,8 @@ int main (int argc, char **argv) {
 		
 		report = FALSE;
 		
-		GMT_init_track (y, h.n, &ylist);
-		nx = n_found = GMT_crossover (x, y, NULL, ylist, h.n, x, y, NULL, ylist, h.n, TRUE, TRUE, &c);
+		gmt_init_track (y, h.n, &ylist);
+		nx = n_found = gmt_crossover (x, y, NULL, ylist, h.n, x, y, NULL, ylist, h.n, TRUE, TRUE, &c);
 		
 		for (i = end = 0; i < nx; i++) {
 			A = lrint (c.xnode[0][i]);
@@ -128,7 +128,7 @@ int main (int argc, char **argv) {
 				y[i] = p[i].y * 1.0e-6;
 			}
 		
-			nx = GMT_crossover (x, y, NULL, ylist, h.n, x, y, NULL, ylist, h.n, TRUE, TRUE, &c);
+			nx = gmt_crossover (x, y, NULL, ylist, h.n, x, y, NULL, ylist, h.n, TRUE, TRUE, &c);
 			
 			if (nx) {	/* Shit... */
 				printf ("\nPolygon # %d still has %d xovers\n", h.id, nx);

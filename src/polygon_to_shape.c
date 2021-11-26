@@ -3,7 +3,7 @@
  *	appropriate GIS tags so ogr2ogr can convert it to a shapefile.
  */
 
-#include "gmt.h"
+#include "gmt_dev.h"
 #include "wvs.h"
 
 #define M270 270000000

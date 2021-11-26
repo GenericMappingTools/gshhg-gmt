@@ -104,9 +104,9 @@ int main (int argc, char **argv)
 			n_r_problems++;
 		}
 		this_n = (Pol_Is_Antarctica (h.continent)) ? np - 1 : np;
-		GMT_init_track (lat, this_n, &ylist);
+		gmt_init_track (lat, this_n, &ylist);
 		//if (!GMT_IS_ZERO (h.east - h.west) && !Pol_Is_Antarctica (h.continent)) {
-			nx = found = GMT_crossover (lon, lat, NULL, ylist, this_n, lon, lat, NULL, ylist, this_n, TRUE, TRUE, &XC);
+			nx = found = gmt_crossover (lon, lat, NULL, ylist, this_n, lon, lat, NULL, ylist, this_n, TRUE, TRUE, &XC);
 			GMT_free ((void *)ylist);
 			for (i = end = 0; i < nx; i++) {
 				A = lrint (XC.xnode[0][i]);

@@ -19,11 +19,15 @@
 
 include ../config.mk.orig	# Default settings
 sinclude ../config.mk		# Over-ride with user settings
-include $(GMTSRCDIR)config.mk
-include $(GMTSRCDIR)common.mk
+##include $(GMTSRCDIR)config.mk
+##include $(GMTSRCDIR)common.mk
 
-INCLUDES	= -I$(srcdir) $(NETCDF_INC) $(GDAL_INC)
+GMT_INC		= /Users/pwessel/GMTdev/gmt-dev/rbuild/gmt6/include/gmt
+GMT_LIB		= -L/Users/pwessel/GMTdev/gmt-dev/rbuild/gmt6/lib -lgmt
+MACPORT_INC	= /opt/local/include
+INCLUDES	= -I$(MACPORT_INC) -I$(GMT_INC)
 DEFINES		= -DGSHHG_NEW_VERSION=\"$(GSHHG_NEW_VERSION)\" -DGSHHG_COMPATIBILITY_VERSION=$(GSHHG_COMPATIBILITY_VERSION) -DYEAR=`date +%Y`
+CFLAGS		=  -g -Wall  -fPIC -fno-strict-aliasing -std=c99 $(INCLUDES) $(DEFINES)
 bindir		= ../bin
 # Douglas-Peucker parameters:
 DP_h 		= 0.2
@@ -164,7 +168,7 @@ coast.o:	$(PROGS_H)
 
 lib:		$(LIB)
 
-$(LIB):		poly_check_subs.o string_check_subs.o douglas_peucker.o coast_io.o poly_misc_subs.o
+$(LIB):		poly_check_subs.o string_check_subs.o douglas_peucker.o coast_io.o poly_misc_subs.o gmtcompat.o
 		$(AR) cvr $@ $?
 		$(RANLIB) $@
 
@@ -173,5 +177,5 @@ $(LIB):		poly_check_subs.o string_check_subs.o douglas_peucker.o coast_io.o poly
 #-------------------------------------------------------------------------------
 
 $(PROGS):	$(LIB) $(PROGS_O)
-		$(CC) $(LDFLAGS) $(@:.exe=).o -L. -lcoast $(GMT_LIB) $(NETCDF_LIB) $(GDAL_LIB) $(LIBS) -o $@
+		$(CC) $(LDFLAGS) $(@:.exe=).o -L. -lcoast $(GMT_LIB) -o $@
 		$(COMPRESS) $@
