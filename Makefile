@@ -91,6 +91,7 @@ tar_gshhg_nc:	data
 		echo "make $(TAG)-gmt-$(GSHHG_NEW_VERSION).tar.gz"
 		rm -f $(TAG)-gmt-$(GSHHG_NEW_VERSION).tar.gz
 		mkdir $(TAG)-gmt-$(GSHHG_NEW_VERSION)
+		echo $(GSHHG_NEW_VERSION) > $(TAG)-gmt-$(GSHHG_NEW_VERSION)/VERSION
 		cd $(TAG)-gmt-$(GSHHG_NEW_VERSION); ln -sf \
 				../src/res_f/binned_GSHHS_f.nc \
 				../src/res_f/binned_border_f.nc \
