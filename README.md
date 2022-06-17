@@ -24,7 +24,7 @@ or from the [GMT main site](https://www.generic-mapping-tools.org/download/).
 
 ## The five resolutions
 
-We will demonstrate the power of the new database by starting with a
+We will demonstrate the power of this database by starting with a
 regional hemisphere map centered near Papua New Guinea and zoom in on a
 specified point. The map regions will be specified in projected km from
 the projection center, e.g., we may want the map to go from km to km in
