@@ -37,7 +37,7 @@ int main (int argc, char **argv)
 	fwrite ((char *)&n_id, sizeof (int), 1, fp);
 	fwrite ((char *)poly, sizeof (struct CHECK), n_id, fp);
 	fclose (fp); */
-	fp = fopen ("/home/aa4/gmt/wvs/headers.b", "r");
+	fp = gshhg_fopen("/home/aa4/gmt/wvs/headers.b", "r");
 	fread ((char *)&n_id, sizeof (int), 1, fp);
 	fread ((char *)poly, sizeof (struct CHECK), n_id, fp);
 	fclose (fp);

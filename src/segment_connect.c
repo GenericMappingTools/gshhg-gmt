@@ -282,7 +282,7 @@ int i_great_circle_dist(struct LONGPAIR A, struct LONGPAIR B )
 
 	c = GMT_great_circle_dist((double)A.x*1e-6, (double)A.y*1e-6, (double)B.x*1e-6, (double)B.y*1e-6);
 
-	return((int)(c * project_info.DIST_M_PR_DEG));
+	return((int)(c * GMT->current.proj.DIST_M_PR_DEG));
 }
 
 void gwrite (struct LONGPAIR p[], int n) {

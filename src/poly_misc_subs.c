@@ -86,19 +86,15 @@ void crude_free_int (int *IX[N_CONTINENTS][2], int *IY[N_CONTINENTS][2], int N[N
 
 void area_init ()
 {	/* Initializes GMT projection parameters to the -JA settings */
-	/* gmtdefs.ellipsoid = GMT_N_ELLIPSOIDS-1; */
-	project_info.projection = GMT_LAMB_AZ_EQ;
-	project_info.unit = GMT_M;
-	project_info.pars[3] = 39.3700787401574814;
-	project_info.region = 1;
-	gmtdefs.line_step = 1.0e7;	/* To avoid nlon/nlat being huge */
-	project_info.degree[0] = project_info.degree[1] = TRUE;
+	/* GMT 6: projection is (re)parsed per polygon in area_size via -R and -JA */
+	GMT->current.setting.map_line_step = 1.0e7;	/* To avoid nlon/nlat being huge */
 }
 
 double area_size (double x[], double y[], int n, int *sign)
 {
 	int i, k;
 	double west, east, south, north, lon, lat, xx, yy, size, ix, iy;
+	char txt_R[GMT_LEN256], txt_J[GMT_LEN256];
 	double area (double x[], double y[], int n);
 	double P[3], M[3];
 	
@@ -121,17 +117,21 @@ double area_size (double x[], double y[], int n, int *sign)
 		north = MAX (north, y[i]);
 	}
 		
-	project_info.pars[0] = lon;
-	project_info.pars[1] = lat;
-	GMT_err_fail (GMT_map_setup (west, east, south, north), "");
+	/* Lambert azimuthal equal-area projection centered on the mean pole, 1:1 scale */
+	sprintf(txt_R, "%.12g/%.12g/%.12g/%.12g", west, east, south, north);
+	sprintf(txt_J, "a%.12g/%.12g/1:1", lon, lat);
+	GMT->common.R.active[RSET] = GMT->common.J.active = false;	/* Allow re-parsing for every polygon */
+	GMT_err_fail(gmt_parse_common_options(GMT, "R", 'R', txt_R), txt_R);
+	GMT_err_fail(gmt_parse_common_options(GMT, "J", 'J', txt_J), txt_J);
+	GMT_err_fail(gmt_map_setup(GMT, GMT->common.R.wesn), "");
 	
-	ix = 1.0 / project_info.x_scale;
-	iy = 1.0 / project_info.y_scale;
+	ix = 1.0 / GMT->current.proj.scale[GMT_X];	/* Undo the scaling to get projected meters */
+	iy = 1.0 / GMT->current.proj.scale[GMT_Y];
 	
 	for (i = 0; i < n; i++) {
-		GMT_geo_to_xy (x[i], y[i], &xx, &yy);
-		x[i] = (xx - project_info.x0) * ix;
-		y[i] = (yy - project_info.y0) * iy;
+		gmt_geo_to_xy(GMT, x[i], y[i], &xx, &yy);
+		x[i] = (xx - GMT->current.proj.origin[GMT_X]) * ix;
+		y[i] = (yy - GMT->current.proj.origin[GMT_Y]) * iy;
 	}
 	
 	size = area (x, y, n);

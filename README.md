@@ -299,6 +299,25 @@ becomes a complicated processing step.
 
    GMT uses a polygon-assembly routine that carries out these tasks on the fly.
 
+## Building the data products
+
+The processing tools in `src` are built with CMake against GMT 6 (the
+development headers `gmt_dev.h` and `libgmt`), netCDF, and the GDAL headers.
+GMT is found through `gmt-config` or `GMT_ROOT`; copy
+`cmake/ConfigUserTemplate.cmake` to `cmake/ConfigUser.cmake` to set paths.
+
+    cmake -S . -B build -G Ninja
+    cmake --build build                      # compile the tools
+    cmake --build build --target data        # binned netCDF files (or full, high, int, low, crude)
+    cmake --build build --target build-all   # tar_gshhg_nc, zip_gshhg_bin, zip_gshhg_shp
+
+Other targets: `binary`, `info`, `build-gshhs`, `shapefiles` (needs `ogr2ogr`),
+`checksum`, `place`, `spotless`. As before, intermediate products are written
+under `src` and the `GSHHS`/`WDBII` directories; the release archives go in the
+build directory. The archives also pick up `README.TXT`, `LICENSE.TXT`,
+`COPYINGv3` and `COPYING.LESSERv3` from `GSHHG_DOC_DIR` (default: the top
+directory).
+
 ## References
 
 - Bohlander, J. and T. Scambos. 2007. Antarctic coastlines and grounding line

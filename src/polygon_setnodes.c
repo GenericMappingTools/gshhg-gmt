@@ -31,7 +31,11 @@ struct BLOB {
 int *lon, *lat;
 int non_zero_winding2 (int xp, int yp, int *x, int *y, int n_path);
 
-struct GRD_HEADER grdh;
+struct GSHHG_GRD {	/* The few GMT4 grid header items we need */
+	unsigned int nx, ny;
+	double x_inc, y_inc;
+	char title[GMT_GRID_TITLE_LEN80];
+} grdh;
 float *grd;
 int *ID;
 int main (int argc, char **argv)
@@ -40,6 +44,8 @@ int main (int argc, char **argv)
 	int iblon, iblat, ij, i0, i1, j0, j1, ii, full, cont_no, c;
 	int *IX[N_CONTINENTS][2], *IY[N_CONTINENTS][2], N[N_CONTINENTS][2];
 	double west, east, blon, blat, x0, w, iw;
+	double wesn[4] = {0.0, 360.0, -90.0, 90.0};
+	char id_file[GMT_BUFSIZ] = {""}, *dot = '\0';
 	float offset;
 	FILE *fp;
 	struct LONGPAIR p;
@@ -56,24 +62,13 @@ int main (int argc, char **argv)
 
 	w = atof (argv[2]);
 	iw = 1.0 / w;
-	GMT_grd_init (&grdh, argc, argv, FALSE);
 	grdh.nx = lrint (360.0 * iw) + 1;
 	grdh.ny = lrint (180.0 * iw) + 1;
 	n_nodes = grdh.nx * grdh.ny;
 	grd = (float *) GMT_memory (VNULL, (size_t)n_nodes, sizeof(float), "polygon_setnodes");
 	ID = (int *) GMT_memory (VNULL, (size_t)n_nodes, sizeof(int), "polygon_setnodes");
-        grdh.x_min = 0.0;
-        grdh.x_max = 360.0;
-        grdh.y_min = -90.0;
-        grdh.y_max = 90.0;
         grdh.x_inc = grdh.y_inc = w;
-        grdh.node_offset = 0;
-        grdh.z_scale_factor = 1.0;
-        grdh.z_add_offset = 0.0;
-        strcpy (grdh.x_units, "Longitude");
-        strcpy (grdh.y_units, "Latitude");
-        strcpy (grdh.z_units, "Polygon Level");
-        sprintf (grdh.title, "Polygon Levels in file %s", argv[1]);
+        snprintf(grdh.title, GMT_GRID_TITLE_LEN80, "Polygon Levels in file %s", argv[1]);
         
         nx_minus_1 = grdh.nx - 1;
         
@@ -253,9 +248,13 @@ int main (int argc, char **argv)
 	free ((void *)lon);
 	free ((void *)lat);
 
-	GMT_err_fail (GMT_write_grd (argv[3], &grdh, grd, 0.0, 0.0, 0.0, 0.0, GMT_pad, FALSE), argv[3]);
+	gshhg_write_float_grid(argv[3], grd, grdh.nx, grdh.ny, wesn, w, grdh.title, "Polygon Level");
 	for (i = 0; i < n_nodes; i++) grd[i] = (float)ID[i];
-	GMT_err_fail (GMT_write_grd ("shit.grd", &grdh, grd, 0.0, 0.0, 0.0, 0.0, GMT_pad, FALSE), "shit.grd");
+	/* Node polygon ID grid for debugging, named after the node grid [was shit.grd] */
+	strncpy(id_file, argv[3], GMT_BUFSIZ - 8);
+	if ((dot = strrchr(id_file, '.'))) *dot = 0;	/* Strip extension */
+	strcat(id_file, "_ID.grd");
+	gshhg_write_float_grid(id_file, grd, grdh.nx, grdh.ny, wesn, w, grdh.title, "Polygon ID");
  	free ((void *)grd);
 	fp = fopen (argv[4], "wb");
 	if (fwrite ((void *)&n_nodes, sizeof (int), 1, fp) != 1) {

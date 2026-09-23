@@ -99,7 +99,7 @@ int main (int argc, char **argv)
 	}
 	else if (feature == IS_BORDER) {
 		if (verbose) fprintf (stderr, "binary_to_ascii: WDBII Borders: %d segments\n", n_id);
-		max_level = GMT_N_BLEVELS;
+		max_level = GMT_N_BLEVELS + 1;	/* Since we go 1-max_level but subtract 1 to get unit (was missing: level 3 file never opened) */
 	}
 	else  {
 		if (verbose) fprintf (stderr, "binary_to_ascii: WDBII Rivers: %d segments\n", n_id);

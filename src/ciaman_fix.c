@@ -29,9 +29,13 @@ int main (int argc, char **argv) {
 	
 	
 	/* Usage: ciaman_fix final_x_polygons.b final_cia2_polygons.b */
+	if (argc < 3) {
+		fprintf(stderr, "usage: ciaman_fix final_x_polygons.b final_cia2_polygons.b [ncut]\n");
+		exit(EXIT_FAILURE);
+	}
 	
-	fp_in1 = fopen(argv[1], "r");
-	fp_in2 = fopen(argv[2], "r");
+	fp_in1 = gshhg_fopen(argv[1], "r");
+	fp_in2 = gshhg_fopen(argv[2], "r");
 	
 	n_id = pos = 0;
 	while (pol_readheader (&poly[n_id].h, fp_in1) == 1) {
@@ -57,7 +61,7 @@ int main (int argc, char **argv) {
 	
 	chdir ("/home/aa4/gmt/wvs/pol");
 	
-	fp = fopen ("/home/aa4/gmt/wvs/x.lis_2", "r");
+	fp = gshhg_fopen("/home/aa4/gmt/wvs/x.lis_2", "r");
 	
 	i = 0;
 	while (fgets (line, 80, fp)) {
@@ -73,7 +77,7 @@ int main (int argc, char **argv) {
 	fclose (fp);
 	np = i;
 	
-	fp_bad = fopen ("/home/aa4/gmt/wvs/bad_polygons.lis_2", "r");
+	fp_bad = gshhg_fopen("/home/aa4/gmt/wvs/bad_polygons.lis_2", "r");
 	while (fp_bad && fgets (line, 80, fp_bad)) {
 		sscanf (line, "%d", &bad);
 		for (i = 0; i < np; i++) {
@@ -85,7 +89,7 @@ int main (int argc, char **argv) {
 	}
 	if (fp_bad) fclose (fp_bad);
 
-	fp_fix = fopen ("/home/aa4/gmt/wvs/fix_polygons.lis_2", "r");
+	fp_fix = gshhg_fopen("/home/aa4/gmt/wvs/fix_polygons.lis_2", "r");
 	while (fp_fix && fgets (line, 80, fp_fix)) {
 		sscanf (line, "%d", &bad);
 		for (i = 0; i < np; i++) {
@@ -97,8 +101,8 @@ int main (int argc, char **argv) {
 	}
 	if (fp_fix) fclose (fp_fix);
 	
-	fp_bad = fopen ("/home/aa4/gmt/wvs/bad_polygons.lis_2", "a");
-	fp_fix = fopen ("/home/aa4/gmt/wvs/fix_polygons.lis_2", "a");
+	fp_bad = gshhg_fopen("/home/aa4/gmt/wvs/bad_polygons.lis_2", "a");
+	fp_fix = gshhg_fopen("/home/aa4/gmt/wvs/fix_polygons.lis_2", "a");
 	
 	for (i = nk = 0; i < np; i++) if (x[i].finished == 1) nk++;
 
@@ -144,7 +148,7 @@ int main (int argc, char **argv) {
 		/* Do file i */
 		
 		sprintf (file, "polygon.%d", go[0]);
-		fp = fopen (file, "w");
+		fp = gshhg_fopen(file, "w");
 		
 		for (id = 0; id < n_id && go[0] != poly[id].h.id; id++);
 		for (id2 = n_id1; id2 < n_id && go[1] != poly[id2].h.id; id2++);
@@ -173,7 +177,7 @@ int main (int argc, char **argv) {
 		/* Do file j */
 		
 		sprintf (file, "polygon.%d", go[1]);
-		fp = fopen (file, "w");
+		fp = gshhg_fopen(file, "w");
 		
 		fseek (fp_in2, poly[id2].pos, 0);
 		
@@ -230,7 +234,7 @@ int main (int argc, char **argv) {
 			fprintf (stderr, "rest now is %d\n", np - nk);
 		}
 		else if (s[0] == 'q') {
-			fp = fopen ("/home/aa4/gmt/wvs/x.lis_2a", "w");
+			fp = gshhg_fopen("/home/aa4/gmt/wvs/x.lis_2a", "w");
 			for (i = 0; i < np; i++) fprintf (fp, "%d\t%d\t%d\n", x[i].a, x[i].b, x[i].nx);
 			fclose (fp);
 			wipeb (x[i].b);

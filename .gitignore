@@ -11,3 +11,12 @@ WDBII/rivers/WDBII_Rivers_segments.b
 WDBII/borders/WDBII_Borders_segments.b
 src/*.o
 src/*.a
+# CMake build
+build/
+cmake/ConfigUser.cmake
+GSHHS/res_f/GSHHS_f_Level_1.txt
+src/res_?/GSHHS_?_*.grd
+src/res_?/GSHHS_?_info.lis
+src/gshhs/
+src/GSHHS_shp/
+src/WDBII_shp/
