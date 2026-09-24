@@ -220,6 +220,12 @@ double slatd, slatm, nlatd, nlatm, wlond, wlonm, elond, elonm, scale;
   g_lstat = lseek(g_lunfil,0L,0);
   g_lstat = read(g_lunfil,g_bytbuf,PHYSIZ);
   g_logrec = g_bytbuf[3];
+  if (g_lstat < 6 || g_logrec <= 4)	/* Not a WVS file; avoid division by zero below */
+  {
+    fprintf(stderr,"read_wvs: %s is not a WVS data file\n", file);
+    wdbpltc_free();
+    return;
+  }
   g_fulrec = g_logrec - 4;
   g_level = g_bytbuf[4];
   ioff = g_bytbuf[5];

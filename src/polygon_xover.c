@@ -15,7 +15,7 @@ struct POLYGON {
 int main (int argc, char **argv)
 {
 	FILE	*fp;
-	int i, n_id, id1, id2, nx, nx_tot, verbose, cnt, full, in, eur_id = 0, cont_no, first = 0, N[N_CONTINENTS][2];
+	int i, n_id, id1, id2, nx, nx_tot, verbose = 0, cnt, full, in, eur_id = 0, cont_no, first = 0, N[N_CONTINENTS][2];
 	double x_shift = 0.0, *X, *Y, *CX[N_CONTINENTS][2], *CY[N_CONTINENTS][2];
 	struct GMT_XSEGMENT *ylist1, *ylist2;
 	struct GMT_XOVER XC;
@@ -128,7 +128,7 @@ int main (int argc, char **argv)
 			GMT_init_track (Y, P[id2].h.n, &ylist2);
 
 			nx = GMT_crossover (P[id1].lon, P[id1].lat, NULL, ylist1, P[id1].h.n, X, Y, NULL, ylist2, P[id2].h.n, FALSE, TRUE, &XC);
-			GMT_free ((void *)ylist2);
+			GMT_free_track(ylist2);
 			if (Pol_Is_Antarctica (cont_no)) {	/* Undo projection for crossover results */
 				for (i = 0; i < nx; i++) rtheta2xy (&XC.x[i], &XC.y[i]);
 				GMT_free ((void *)X);
@@ -143,7 +143,7 @@ int main (int argc, char **argv)
 			}
 			nx_tot += nx;
 		}
-		GMT_free ((void *)ylist1);
+		GMT_free_track(ylist1);
 		GMT_free (P[id1].lon);
 		GMT_free (P[id1].lat);
 	}

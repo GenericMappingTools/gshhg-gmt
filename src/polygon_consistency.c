@@ -107,7 +107,7 @@ int main (int argc, char **argv)
 		GMT_init_track (lat, this_n, &ylist);
 		//if (!GMT_IS_ZERO (h.east - h.west) && !Pol_Is_Antarctica (h.continent)) {
 			nx = found = GMT_crossover (lon, lat, NULL, ylist, this_n, lon, lat, NULL, ylist, this_n, TRUE, TRUE, &XC);
-			GMT_free ((void *)ylist);
+			GMT_free_track(ylist);
 			for (i = end = 0; i < nx; i++) {
 				A = lrint (XC.xnode[0][i]);
 				B = lrint (XC.xnode[1][i]);
@@ -176,7 +176,7 @@ int main (int argc, char **argv)
 				/* Look for spikes such that the intermediate (spike-making) point is < min_dist from the line defined by its two neighbors */
 				if (((lon[right] >= lon[left] && lon[right] <= lon[i]) || (lon[right] <= lon[left] && lon[right] >= lon[i])) && 
 					((lat[right] >= lat[left] && lat[right] <= lat[i]) || (lat[right] <= lat[left] && lat[right] >= lat[i]))) {	/* right may be a spike */
-					dist = fabs (sin_a) * hypot (dx2, dy2) * project_info.DIST_M_PR_DEG;
+					dist = fabs(sin_a) * hypot(dx2, dy2) * GMT->current.proj.DIST_M_PR_DEG;
 					if (angle < 90.0 && dist < dist_limit) {
 						printf ("%d\tNext spike excursion on line %d-%d-%d\n", h.id, left, i, right);
 						skip_i = 1;
@@ -185,7 +185,7 @@ int main (int argc, char **argv)
 				}
 				else if (((lon[left] >= lon[right] && lon[left] <= lon[i]) || (lon[left] <= lon[right] && lon[left] >= lon[i])) && 
 					((lat[left] >= lat[right] && lat[left] <= lat[i]) || (lat[left] <= lat[right] && lat[left] >= lat[i]))) {	/* left may be a spike */
-					dist = fabs (sin_a) * hypot (dx1, dy1) * project_info.DIST_M_PR_DEG;
+					dist = fabs(sin_a) * hypot(dx1, dy1) * GMT->current.proj.DIST_M_PR_DEG;
 					if (angle < 90.0 && dist < dist_limit) {
 						printf ("%d\tPrev spike excursion on line %d-%d-%d\n", h.id, left, i, right);
 						skip_i = 1;

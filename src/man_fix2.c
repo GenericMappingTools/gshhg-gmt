@@ -21,16 +21,16 @@ int main (int argc, char **argv) {
 	
 	chdir ("/home/aa4/gmt/wvs/pol");
 	
-	fp_bad = fopen ("/home/aa4/gmt/wvs/bad_3.lis", "w");
-	fp_fix = fopen ("/home/aa4/gmt/wvs/fix_3.lis", "w");
-	fp = fopen ("/home/aa4/gmt/wvs/headers2.b", "r");
-	fp_in = fopen ("/home/aa4/gmt/wvs/final_x_polygons.b", "r");
+	fp_bad = gshhg_fopen("/home/aa4/gmt/wvs/bad_3.lis", "w");
+	fp_fix = gshhg_fopen("/home/aa4/gmt/wvs/fix_3.lis", "w");
+	fp = gshhg_fopen("/home/aa4/gmt/wvs/headers2.b", "r");
+	fp_in = gshhg_fopen("/home/aa4/gmt/wvs/final_x_polygons.b", "r");
 	fread ((char *)&n_id, sizeof (int), 1, fp);
 	fread ((char *)poly, sizeof (struct CHECK), n_id, fp);
 	fclose (fp);
 	
 	i = 0;
-	fpj = fopen ("/home/aa4/gmt/wvs/junk", "r");
+	fpj = gshhg_fopen("/home/aa4/gmt/wvs/junk", "r");
 	while (fgets (line, 512, fpj)) {
 		sscanf (line, "%d %d", &go[0], &go[1]);
 		w = (floor (poly[go[0]].h.west) - 1) * MILL;
@@ -40,7 +40,7 @@ int main (int argc, char **argv) {
 		for (j = 0; j < 2; j++) {
 				
 			sprintf (file, "polygon.%d", go[j]);
-			fp = fopen (file, "w");
+			fp = gshhg_fopen(file, "w");
 		
 			for (id = 0; id < n_id && go[j] != poly[id].h.id; id++);
 			

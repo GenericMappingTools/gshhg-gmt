@@ -3,7 +3,7 @@
  * Here are some things we use in dealing with the wvs data.
  */
 
-#include "gmt.h"
+#include "gmt4_compat.h"
 #define _GMT_
 #define _WVS_H_
 
@@ -32,8 +32,6 @@
 #define OUTSIDE		0
 #define INSIDE		1
 
-#define GSHHS_ANTARCTICA_ICE_SRC	2	/* Source ID for Antarctica ice line */
-#define GSHHS_ANTARCTICA_GROUND_SRC	3	/* Source ID for Antarctica grounding line */
 
 /* Test to determine if polygon ID is one of (several) Antarctica polygons */
 #define Pol_Is_Antarctica(ID) (ID == ANTARCTICA || ID == ANTARCTICA_G)

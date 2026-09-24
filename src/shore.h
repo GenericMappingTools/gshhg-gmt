@@ -1,6 +1,5 @@
 #ifndef _WVS_H_
 #define MILL (1000000)
-#define GSHHS_MAX_DELTA 65535				/* Largest value to store in a ushort, used as largest dx or dy in bin  */
 #define M360 360000000
 #define M180 180000000
 #define M90   90000000

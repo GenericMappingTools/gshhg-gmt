@@ -143,7 +143,7 @@ int main (int argc, char **argv) {
 			
 		}
 		
-		free ((void *)ylist);
+		GMT_free_track(ylist);
 		/* Write out new trimmed polygon */
 		
 		if (update && h.n > 2) {

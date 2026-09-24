@@ -45,7 +45,7 @@ int main (int argc, char **argv) {
 	
 	struct SEGMENT *s, **ss;
 	struct	LONGPAIR p;
-	struct GRD_HEADER n_head;
+	unsigned int n_nx, n_ny;
 	
 	/* Creates binned_prefix.{bin,seg,pt,pol,ndid} files */
 	if (argc != 6) {
@@ -534,11 +534,8 @@ int main (int argc, char **argv) {
 
 	bin_head = (struct GMT3_BIN_HEADER *) GMT_memory (VNULL, nbins, sizeof (struct GMT3_BIN_HEADER), "polygon_to_bins");
 	
-	GMT_grd_init (&n_head, argc, argv, FALSE);
-	GMT_err_fail (GMT_read_grd_info (nodelevel_file, &n_head), nodelevel_file);
-	node = (float *) GMT_memory (VNULL, n_head.nx * n_head.ny, sizeof (float), "polygon_to_bins");
-	GMT_err_fail (GMT_read_grd (nodelevel_file, &n_head, node, 0.0, 0.0, 0.0, 0.0, GMT_pad, FALSE), nodelevel_file);
-	se = 1;	ne = 1 - n_head.nx;	nw = -n_head.nx;
+	node = gshhg_read_float_grid(nodelevel_file, &n_nx, &n_ny);
+	se = 1;	ne = 1 - (int)n_nx;	nw = -(int)n_nx;
 	
 	/* Create two node_level arrays for the bins: One using Antarctica ice-shelf as coastline and the other using the grounding line */
 	for (b = file_head.n_segments = 0; b < nbins; b++) {

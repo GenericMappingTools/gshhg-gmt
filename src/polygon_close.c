@@ -6,15 +6,19 @@ int main (int argc, char **argv) {
 	char line[BUFSIZ];
 	double x1[10000], x2[10000], y1[10000], y2[10000], d, dmin = DBL_MAX;
 	
+	if (argc != 3) {
+		fprintf(stderr, "usage: polygon_close id1 id2  (reads polygon.<id1> and polygon.<id2>)\n");
+		exit(EXIT_FAILURE);
+	}
 	sprintf (line, "polygon.%s", argv[1]);
-	fp1 = fopen (line, "r");
+	fp1 = gshhg_fopen(line, "r");
 	while (fgets (line, BUFSIZ, fp1)) {
 		sscanf (line, "%lf %lf", &x1[n1], &y1[n1]);
 		n1++;
 	}
 	fclose (fp1);
 	sprintf (line, "polygon.%s", argv[2]);
-	fp2 = fopen (line, "r");
+	fp2 = gshhg_fopen(line, "r");
 	while (fgets (line, BUFSIZ, fp2)) {
 		sscanf (line, "%lf %lf", &x2[n2], &y2[n2]);
 		n2++;

@@ -21,12 +21,12 @@ int main (int argc, char **argv) {
 	
 	chdir ("/home/aa4/gmt/wvs/pol");
 	
-	fp = fopen ("/home/aa4/gmt/wvs/headers2.b", "r");
+	fp = gshhg_fopen("/home/aa4/gmt/wvs/headers2.b", "r");
 	fread ((char *)&n_id, sizeof (int), 1, fp);
 	fread ((char *)poly, sizeof (struct CHECK), n_id, fp);
 	fclose (fp);
 
-	fp = fopen ("/home/aa4/gmt/wvs/x.lis2", "r");
+	fp = gshhg_fopen("/home/aa4/gmt/wvs/x.lis2", "r");
 	
 	i = 0;
 	while (fgets (line, 80, fp)) {
@@ -42,7 +42,7 @@ int main (int argc, char **argv) {
 	fclose (fp);
 	np = i;
 	
-	fp_bad = fopen ("/home/aa4/gmt/wvs/bad_polygons.lis2", "r");
+	fp_bad = gshhg_fopen("/home/aa4/gmt/wvs/bad_polygons.lis2", "r");
 	while (fgets (line, 80, fp_bad)) {
 		sscanf (line, "%d", &bad);
 		for (i = 0; i < np; i++) {
@@ -54,7 +54,7 @@ int main (int argc, char **argv) {
 	}
 	fclose (fp_bad);
 
-	fp_fix = fopen ("/home/aa4/gmt/wvs/fix_polygons.lis2", "r");
+	fp_fix = gshhg_fopen("/home/aa4/gmt/wvs/fix_polygons.lis2", "r");
 	while (fgets (line, 80, fp_fix)) {
 		sscanf (line, "%d", &bad);
 		for (i = 0; i < np; i++) {
@@ -66,10 +66,10 @@ int main (int argc, char **argv) {
 	}
 	fclose (fp_fix);
 	
-	fp_in = fopen ("/home/aa4/gmt/wvs/final_x_polygons.b", "r");
+	fp_in = gshhg_fopen("/home/aa4/gmt/wvs/final_x_polygons.b", "r");
 	
-	fp_bad = fopen ("/home/aa4/gmt/wvs/bad_polygons.lis2", "a");
-	fp_fix = fopen ("/home/aa4/gmt/wvs/fix_polygons.lis2", "a");
+	fp_bad = gshhg_fopen("/home/aa4/gmt/wvs/bad_polygons.lis2", "a");
+	fp_fix = gshhg_fopen("/home/aa4/gmt/wvs/fix_polygons.lis2", "a");
 	
 	for (i = nk = 0; i < np; i++) if (x[i].f == 1) nk++;
 
@@ -103,7 +103,7 @@ int main (int argc, char **argv) {
 		for (j = 0; j < 2; j++) {
 				
 			sprintf (file, "polygon.%d", go[j]);
-			fp = fopen (file, "w");
+			fp = gshhg_fopen(file, "w");
 		
 			for (id = 0; id < n_id && go[j] != poly[id].h.id; id++);
 			
@@ -144,7 +144,7 @@ int main (int argc, char **argv) {
 			fprintf (stderr, "rest now is %d\n", np - nk);
 		}
 		else if (s[0] == 'q') {
-			fp = fopen ("/home/aa4/gmt/wvs/x.lis3", "w");
+			fp = gshhg_fopen("/home/aa4/gmt/wvs/x.lis3", "w");
 			for (i = 0; i < np; i++) fprintf (fp, "%d\t%d\t%d\n", x[i].a, x[i].b, x[i].nx);
 			fclose (fp);
 			exit (0);
